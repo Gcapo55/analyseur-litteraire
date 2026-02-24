@@ -4,7 +4,16 @@ class Texte:
         self.auteur = auteur
         self.annee = annee
         self.contenu = contenu
-
+    @property
+    def titre(self) -> str :
+        return self._titre
+    
+    @titre.setter
+    def titre(self, nouveau: str):
+        if nouveau == "":
+            raise ValueError("Le nom est vide.")
+        self._titre = nouveau
+    
     def nombre_mots(self) -> int:
         return len(self.contenu.split())
     def mots_uniques(self) -> set[str]:
