@@ -13,13 +13,14 @@ class Corpus:
 
     def rechercher(self, mot_cle: str) -> list[Texte]:
         return [l for l in self.textes if mot_cle in l.titre]
-    
-texte_test1 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
-texte_test2 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
 
-corpus = Corpus("Corpus")
-corpus.ajouter(texte_test1)
-corpus.ajouter(texte_test2)
+if __name__ == "__main__":
+    texte_test1 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
+    texte_test2 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
 
-print(corpus.nom) 
-print(corpus.textes)
+    corpus = Corpus("Corpus")
+    corpus.ajouter(texte_test1)
+    corpus.ajouter(texte_test2)
+
+    print(corpus.nom) 
+    print(corpus.textes)

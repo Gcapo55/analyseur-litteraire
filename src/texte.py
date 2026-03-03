@@ -1,10 +1,27 @@
 from collections import Counter
 
 class Texte:
-    def __init__(self, titre: str, auteur: str, contenu: str):
+    def __init__(self, titre: str, auteur: str, contenu: str, annee: int):
         self._titre = titre
         self.auteur = auteur
         self.contenu = contenu
+        self.annee = annee
+
+    def __str__ (self) -> str:
+        return f"{self.titre} ({self.auteur}, {self.annee})"
+    
+    def __repr__ (self) -> str:
+        return f"Texte(titre={self.titre!r}, auteur={self.auteur!r}, année={self.annee})"
+    
+    def __eq__ (self, other) -> bool:
+        if not isinstance(other, Texte):
+            return NotImplemented
+        return (self.titre == other.titre and self.auteur == other.auteur)
+    
+    def __lt__ (self, other):
+        if not isinstance(other, Texte):
+            return NotImplemented
+        return self.annee < other.annee
 
     @property
     def titre(self) -> str:
@@ -33,9 +50,8 @@ class Texte:
     
 
 if __name__ == "__main__":
-    texte_test = Texte("Titre", "Moi", "Un texte quelconque oui oui")
-    print(texte_test.titre)
-    #texte_test.titre = ""
-    #print(texte_test.mots_uniques())
+    t1 = Texte("Texte1", "Moi", "Un texte quelconque oui oui", 2012)
+    t2 = Texte("Texte2", "Toi", "contenu vide", 1989)
+    t3 = Texte("Texte3", "Nous", "contenu vide très vide", 1909)
 
-    print(texte_test.frequences())
+    print(sorted([t3, t1, t2]))
