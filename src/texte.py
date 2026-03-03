@@ -50,8 +50,4 @@ class Texte:
     
 
 if __name__ == "__main__":
-    t1 = Texte("Texte1", "Moi", "Un texte quelconque oui oui", 2012)
-    t2 = Texte("Texte2", "Toi", "contenu vide", 1989)
-    t3 = Texte("Texte3", "Nous", "contenu vide très vide", 1909)
-
-    print(sorted([t3, t1, t2]))
+    pass

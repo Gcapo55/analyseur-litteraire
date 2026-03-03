@@ -13,14 +13,37 @@ class Corpus:
 
     def rechercher(self, mot_cle: str) -> list[Texte]:
         return [l for l in self.textes if mot_cle in l.titre]
+    
+    def __len__(self)-> int:
+        return len(self.textes)
+    
+    def __getitem__(self, index: int) -> Texte:
+        return self.textes[index]
+    
+    def __contains__(self, titre: str) -> bool:
+        return any(t.titre == titre for t in self.textes)
+    
+    def __iter__(self):
+        return iter(self.textes)
+    
+    def __add__(self, other: "Corpus") -> "Corpus":
+        nouveau = Corpus(f"{self.nom} + {other.nom}")
+        for t in self.textes:
+            nouveau.ajouter(t)
+        for t in other.textes:
+            nouveau.ajouter(t)
+        return nouveau
 
 if __name__ == "__main__":
-    texte_test1 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
-    texte_test2 = Texte("Titre", "Moi", "Un texte quelconque oui oui")
+    t1 = Texte("Texte1", "Moi", "Un texte quelconque oui oui", 2012)
+    t2 = Texte("Texte2", "Toi", "contenu vide", 1989)
+    t3 = Texte("Texte3", "Nous", "contenu vide très vide", 1909)
 
-    corpus = Corpus("Corpus")
-    corpus.ajouter(texte_test1)
-    corpus.ajouter(texte_test2)
+    corpus1= Corpus("Corpus 1")
+    
+    corpus1.ajouter(t1)
+    corpus1.ajouter(t2)
+    corpus1.ajouter(t3)
 
-    print(corpus.nom) 
-    print(corpus.textes)
+    for t in corpus1:
+        print(t)
