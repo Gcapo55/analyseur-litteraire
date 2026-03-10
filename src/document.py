@@ -1,4 +1,5 @@
 from collections import Counter
+from abc import ABC, abstractmethod
 
 class Document:
     def __init__(self, titre: str, auteur: str, contenu: str, annee: int):
@@ -96,6 +97,32 @@ class Poeme(Document):
         self.vers = vers
     def resume(self) -> str:       # override
         return f"Poeme de {self.vers} vers"
+    
+class AnalyseurTexte(ABC):
+    @abstractmethod
+    def analyser(self, texte: "Document") -> dict: ...
+    def analyser_corpus(self, docs: list["Document"]) -> list[dict]:
+        return [self.analyser(d) for d in docs]
+
+class CompteurMots(AnalyseurTexte):
+    def analyser(self, texte: "Document") -> dict:
+        mots = texte.resume().lower().split()
+        return {"total": len(mots), "uniques": len(set(mots))}
+    
+class AnalyseurFrequence(AnalyseurTexte):
+    def analyser(self, texte:"Document") -> dict:
+        cnt = Counter(texte.contenu.split()).most_common(10)
+        return cnt
+
+class AnalyseurLongueur(AnalyseurTexte):
+    def analyser(self, texte:"Document") -> dict:
+        mots = texte.contenu.split()
+        phrases = texte.contenu.split("\n")
+
+        print(len(mots), len(phrases), len(mots)/len(phrases))
+
+
+
     
     
 if __name__ == "__main__":

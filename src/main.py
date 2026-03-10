@@ -67,6 +67,14 @@ def main():
 
     corpus1.afficher_resumes()
 
+    a = AnalyseurLongueur()
+
+    print(a.analyser(t1))
+
+    try:
+      b = AnalyseurTexte()
+    except TypeError:
+       print("Intitializing AnalyseurTexte() gives TypeError")
 
 if __name__ == "__main__":
     main()
