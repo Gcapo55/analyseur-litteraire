@@ -23,7 +23,8 @@ class ExporterCSV:
     
 class Sauvegarder:
     def sauver(self, chemin):
-        with open(chemin, "w") as f: f.write(self.txt)
+        with open(chemin, "w") as f: 
+            f.write(self.txt)
 
 texte = Document("Germinal", "Zola", "Bla bla les mineurs meurent", 1885)
 
